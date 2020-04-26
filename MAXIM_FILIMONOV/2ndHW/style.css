@@ -1,0 +1,133 @@
+.container {
+    font-family: "Helvetica";
+    padding-top: 40px;
+    background-color: rgba(145, 169, 177, 0.09);
+  }
+  
+  .table {
+    box-shadow: -2px 2px 10px 2px rgba(61, 94, 69, 0.63);
+  }
+  .table .quantity {
+    border-radius: 50px;
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    color: white;
+    float: right;
+    background-color: rgba(65, 80, 87, 0.63);
+  }
+  .table .arrowName_top,
+  .table .arrowPrice_top {
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    margin: 6px 13px 0 0;
+    display: inline-block;
+    float: right;
+    width: 0;
+    border-bottom: 14px solid rgba(45, 175, 77, 0.63);
+  }
+  .table .arrowName_down,
+  .table .arrowPrice_down {
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    margin: 6px 13px 0 0;
+    display: inline-block;
+    float: right;
+    width: 0;
+    border-top: 14px solid rgba(45, 175, 77, 0.63);
+  }
+  .table .arrowName_none,
+  .table .arrowPrice_none {
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    margin: 6px 13px 0 0;
+    display: inline-block;
+    float: right;
+    width: 0;
+    border-bottom: 12px solid lightgray;
+  }
+  
+  .overlay-add {
+    top: 0;
+    left: 0;
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+  }
+  .overlay-add .popup-add {
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: white;
+    color: rgba(20, 37, 24, 0.63);
+    border: 2px solid rgba(20, 37, 24, 0.63);
+    border-radius: 10px;
+    box-shadow: -2px 2px 10px 2px rgba(61, 94, 69, 0.63);
+    position: absolute;
+    width: 500px;
+    height: 580px;
+    left: 50%;
+    top: 50%;
+  }
+  .overlay-add .popup-add h3 {
+    text-align: center;
+    color: rgba(45, 79, 97, 0.95);
+  }
+  .overlay-add .popup-add label {
+    margin-left: 15px;
+  }
+  .overlay-add .popup-add .group-forms {
+    display: flex;
+    flex-direction: row;
+  }
+  .overlay-add .popup-add .address-box {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    height: 110px;
+    padding: 10px;
+    margin-bottom: 25px;
+    line-height: 15px;
+  }
+  .overlay-add .popup-add .address-box hr {
+    margin: 3px;
+  }
+  .overlay-add .popup-add .address-box-rus {
+    display: none;
+  }
+  .overlay-add .popup-add .address-box-ukr {
+    display: none;
+  }
+  .overlay-add .popup-add .address-box-bel {
+    display: none;
+  }
+  .overlay-add .popup-add input:invalid {
+    border-color: rgba(85, 148, 26, 0.63);
+  }
+  
+  .overlay-del {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+  .overlay-del .popup-del {
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: white;
+    color: rgba(20, 37, 24, 0.63);
+    border: 2px solid rgba(20, 37, 24, 0.63);
+    border-radius: 10px;
+    box-shadow: -2px 2px 10px 2px rgba(61, 94, 69, 0.63);
+  }

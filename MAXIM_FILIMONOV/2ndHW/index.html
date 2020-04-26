@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>jQuerry Table Shop</title>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand">jQuerry Table Shop</a>
+      <form class="form-inline">
+        <button type="button" class="btn btn-primary mr-sm-2" >Add new item</button>
+        <input class="form-control mr-sm-2 " type="search"  placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0"id="searchBtn" >Search</button>
+      </form>
+    </nav>
+    <div class="container">
+      <table class="table table-striped table-dark" id="Table">
+        <thead>
+          <tr> 
+            <th style="width: 60%"><a href="#" onclick="sortName();">Name</a><div id="arrowName" class="arrowName_none" onclick="sortName();"></div></th>
+            <th style="width: 20%"><a href="#" onclick="sortPrice();">Price</a><div id="arrowPrice" class="arrowPrice_none"onclick="sortPrice();"></div></th>
+            <th scope="col">:^)</th>
+          </tr>
+        </thead>
+          <tbody id="tableBody"></tbody>
+      </table>
+      <input type="hidden" id="orderN" value="asc">
+			<input type="hidden" id="orderP" value="asc">
+    </div>
+    <form class="overlay-add" onsubmit="createNewContent.call(editContent); return false;">
+      <div class="popup-add">
+        <h3 id='popHead'>Product name</h3>
+        <hr>
+        <div class="form-group" >
+          <label for="name-product">Name:</label>
+          <div class="col-md-8">
+            <input type="text" minlength="5" maxlength="15" pattern="\S+.*" title = 'Название продукта не должно содержать только пробелы' class="form-control" id="name-product" placeholder="Name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Supplier email:</label>
+          <div class="col-md-7">
+            <input type="email" class="form-control" id="email" placeholder="example@mple.ex" required>
+          </div>
+        </div>
+        <div class="group-forms ">
+          <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <div class="col-md-7">
+              <input type="number" class="form-control" id="quantity" placeholder="10" min="1" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="price" min="0" onfocus="changePriceToNumber()" onblur="formPrice()" required>
+            </div>
+          </div>
+        </div>
+        <label for="location">Delivery:</label>
+        <div class="group-forms ">
+          <div class="col-md-6 address-box">
+            <select name="location" class="form-control" id="location" onchange="locSelect([])">
+            </select>
+          </div>
+          <div class="group-forms__cities col-md-5  "id="switches">
+            <label for="selectAll">
+              <input type="checkbox" id="selectAll"> Select All
+            </label>
+            <hr>
+          </div>
+        </div>
+        <div class="row col-md-12">
+          <div class="col-md-5">
+            <button type="submit"  name="submit" class="btn btn-block btn-warning btn-change">Create</button>
+          </div>
+          <div class="col-md-5 offset-md-2">
+            <button type="button" class="btn btn-block btn-info cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form class="overlay-del">
+      <div class="popup-del">
+        <h3>Are you sure?</h3>
+        <hr>
+        <p class="popup-del-text"></p>
+        <div class="row col-md-12">
+          <div class="col-md-5">
+            <button type="button" class="btn btn-block btn-info btn-delete-yes" onclick="deleteContent.call(popDelete)">Yes</button>
+          </div>
+          <div class="col-md-5 offset-md-2">
+            <button type="button" class="btn btn-block btn-warning btn-delete-no"onclick="closeDeletePopup()">No</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="lodash.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src='index.js'></script>
+  </body>
+</html>
