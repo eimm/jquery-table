@@ -1,5 +1,5 @@
 function* idMaker() {
-	debugger;
+	//debugger;
     var index = 0;
     for(let i = 0;1; i++)
       yield index++;
@@ -109,13 +109,11 @@ function editContent(id) {
 	this.id=id;
 	let tabContent = _.find(tabCont,{'id':id});
     this.tabContent = tabContent;
-	(function () {//open edit popup
-		$('#popHead').html(tabContent.name);
-        $('.container').css('filter', 'blur(5px)');
-        $('.overlay-add').fadeIn();
-        $('.btn-change').text('Edit');
-    })();
-    
+//open edit popup
+	$('#popHead').html(tabContent.name);
+    $('.container').css('filter', 'blur(5px)');
+    $('.overlay-add').fadeIn();
+    $('.btn-change').text('Edit');
 	$('#name-product').val(tabContent.name);
 	$('#email').val(tabContent.email);
 	$('#quantity').val(tabContent.quantity);
@@ -149,13 +147,50 @@ function priceAsUSD (price) {
 }
 
 function formPrice() {
-	let price = priceAsUSD($('#price').val());
+	let price = $('#price').val();
+	let reg = /^\d+$/;
+	if (reg.test(price)) {
+		$('.btn-change').prop('disabled',false);
+		price = priceAsUSD(price);
+	}else{
+		$('.btn-change').prop('disabled',true);
+		price = 'Price must be a number';
+	}
 	$('#price').val(price);
 }
 
 function changePriceToNumber() {
 	let price = Number($('#price').val().replace(/[^0-9.-]+/g,""));
 	$('#price').val(price);
+}
+
+function checkQuantity (){
+	let quantity = $('#quantity').val();
+	let reg = /^\d+$/;
+	if (reg.test(quantity)) {
+		console.log(quantity);
+		$('.btn-change').prop('disabled',false);
+		console.log('CorQ');
+
+	}else{
+		$('.btn-change').prop('disabled',true);
+		quantity = 'Quantity must be a number';
+		console.log('IncQ');
+	}
+	$('#quantity').val(quantity);
+}
+
+function checkEmail(){
+	let email = $('#email').val();
+	// hehe
+	let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	if (regEmail.test(email)) {
+		$('.btn-change').prop('disabled',false);
+	}else{
+		$('.btn-change').prop('disabled',true);
+		email = 'Your Email is invalid';
+	}
+	$('#email').val(email);
 }
 
 //search button
