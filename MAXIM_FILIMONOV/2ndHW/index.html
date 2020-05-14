@@ -105,6 +105,21 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+
+    <script type="text/template" id="rowTmpl">
+      <tr id=product>
+        <td>
+          <a href='#' onclick=''> <%= name %></a> 
+          <div class='quantity'><%= quantity %></div>
+        </td> 
+        <td><%= price %></td>
+        <td>
+          <button type="button" id="<%= id %>" class=" col-md-5 btn btn-warning btn-sm" onclick='editContent(this.id)'>Edit</button>
+          <button type="button" id="<%= id %>"  class=" col-md-5 btn btn-info btn-sm btn-delete" onclick='popDelete(this.id)'>Delete</button>
+        </td>
+      </tr>
+    </script>
     <script src="lodash.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src='index.js'></script>

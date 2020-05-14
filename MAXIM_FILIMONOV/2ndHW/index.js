@@ -1,3 +1,4 @@
+//var _ = require('lodash');
 function* idMaker() {
 	//debugger;
     var index = 0;
@@ -20,13 +21,24 @@ class TableContent {
 } 
 
 TableContent.prototype.insertRowToTable = function(){
-    $("#Table").append("<tr id=product"+this.id+">" +
-		"<td>" + "<a href='#' onclick=''>" + this.name + "</a>" + "<div class='quantity'>" + this.quantity + "</div></td>" +
-		"<td>" + this.price + "</td>" +
-		"<td><button type=\"button\" id=\'("+this.id+")'\" class=\" col-md-5 btn btn-warning btn-sm\" onclick='editContent("+$(this).attr('id')+")'>Edit</button>\n" +
-		"<button type=\"button\" id=\'("+this.id+")'\"  class=\" col-md-5 btn btn-info btn-sm btn-delete\" onclick='popDelete("+$(this).attr('id')+")'>Delete</button></td>" +
-		"</tr>");
+	let tableRowTemplate = _.template(document.getElementById('rowTmpl').innerHTML);
+	let options = {
+		id: this.id,
+		name: this.name,
+		quantity: this.quantity,
+		price: this.price,
+
+	};
+//     $("#Table").append("<tr id=product"+this.id+">" +
+// 		"<td>" + "<a href='#' onclick=''>" + this.name + "</a>" + "<div class='quantity'>" + this.quantity + "</div></td>" +
+// 		"<td>" + this.price + "</td>" +
+// 		"<td><button type=\"button\" id=\'("+this.id+")'\" class=\" col-md-5 btn btn-warning btn-sm\" onclick='editContent("+$(this).attr('id')+")'>Edit</button>\n" +
+// 		"<button type=\"button\" id=\'("+this.id+")'\"  class=\" col-md-5 btn btn-info btn-sm btn-delete\" onclick='popDelete("+$(this).attr('id')+")'>Delete</button></td>" +
+// 		"</tr>");
+	$("#tableBody").append(tableRowTemplate(options));
+
 };
+
 
 //mocks
 let tabCont = [];
@@ -48,6 +60,8 @@ function createNewContent (){//this function gets context from editContent()
 	// if(typeof id !== undefined) { I've tried so hard to lose it all but in the end it doesnt even matter
 	// 	temp = id;
 	// }
+	//console.log(this.tabContent);
+	//debugger;
      if (flag != 0){
 		deleteContent();//deleting old entry to recreate it for editing
 	 }
@@ -69,8 +83,13 @@ function createNewContent (){//this function gets context from editContent()
 	});
 	$('.container').css('filter', 'none');
 	$('.overlay-add').fadeOut();
-};
+}
 
+function iHaveToRefreshNowWithThisTemplatesXD (){
+	for (let i = 0 ; i< tabCont.length+1; i++){
+		$('#product').remove();
+	}	
+}
 //delete product
 function deleteContent() {// this fucntion gets context from popDelete()
 	let promise = new Promise((resolve) => {
@@ -79,7 +98,8 @@ function deleteContent() {// this fucntion gets context from popDelete()
         }, 0);
 	});
 	promise.then(() =>{
-        gen = idMaker();
+		gen = idMaker();
+		iHaveToRefreshNowWithThisTemplatesXD ()
         for (let i =0 ; i< tabCont.length; i++){
             tabCont[i].insertRowToTable();
         }   
@@ -91,6 +111,7 @@ function deleteContent() {// this fucntion gets context from popDelete()
 
 //delete popUp
 function popDelete(id) {
+	id = parseInt(id);
     let tabContent = _.find(tabCont,{'id':id});
     this.tabContent = tabContent;
 	$('.container').css('filter', 'blur(5px)');
@@ -106,10 +127,12 @@ function closeDeletePopup(){
 
 //'Edit' popup opener
 function editContent(id) {
-	this.id=id;
-	let tabContent = _.find(tabCont,{'id':id});
-    this.tabContent = tabContent;
+	id = parseInt(id);
+	this.id = id;
+	let tabContent = _.find(tabCont,{'id': id});
+	this.tabContent = tabContent;
 //open edit popup
+	//debugger;
 	$('#popHead').html(tabContent.name);
     $('.container').css('filter', 'blur(5px)');
     $('.overlay-add').fadeIn();
@@ -168,14 +191,14 @@ function checkQuantity (){
 	let quantity = $('#quantity').val();
 	let reg = /^\d+$/;
 	if (reg.test(quantity)) {
-		console.log(quantity);
+		//console.log(quantity);
 		$('.btn-change').prop('disabled',false);
-		console.log('CorQ');
+		//console.log('CorQ');
 
 	}else{
 		$('.btn-change').prop('disabled',true);
 		quantity = 'Quantity must be a number';
-		console.log('IncQ');
+		//console.log('IncQ');
 	}
 	$('#quantity').val(quantity);
 }
